@@ -5,7 +5,7 @@ namespace ConsoleApplication
     public class Player
     {
         public int Value { get; set; }
-        private bool IsHuman { get; set; }
+        public bool IsHuman { get; set; }
         private string Color { get; set; }
 
         public Player(int value, bool isHuman, string color)

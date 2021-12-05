@@ -4,3 +4,10 @@
 /home/reuben/RiderProjects/ConsoleApplication/ConsoleApplication/obj/Debug/ConsoleApplication.csproj.CoreCompileInputs.cache
 /home/reuben/RiderProjects/ConsoleApplication/ConsoleApplication/obj/Debug/ConsoleApplication.exe
 /home/reuben/RiderProjects/ConsoleApplication/ConsoleApplication/obj/Debug/ConsoleApplication.pdb
+C:\Users\reube\RiderProjects\ConnectFour\ConsoleApplication\bin\Debug\ConsoleApplication.exe
+C:\Users\reube\RiderProjects\ConnectFour\ConsoleApplication\bin\Debug\ConsoleApplication.pdb
+C:\Users\reube\RiderProjects\ConnectFour\ConsoleApplication\obj\Debug\ConsoleApplication.csproj.AssemblyReference.cache
+C:\Users\reube\RiderProjects\ConnectFour\ConsoleApplication\obj\Debug\ConsoleApplication.csproj.SuggestedBindingRedirects.cache
+C:\Users\reube\RiderProjects\ConnectFour\ConsoleApplication\obj\Debug\ConsoleApplication.csproj.CoreCompileInputs.cache
+C:\Users\reube\RiderProjects\ConnectFour\ConsoleApplication\obj\Debug\ConsoleApplication.exe
+C:\Users\reube\RiderProjects\ConnectFour\ConsoleApplication\obj\Debug\ConsoleApplication.pdb

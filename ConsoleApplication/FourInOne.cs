@@ -12,15 +12,16 @@ namespace ConsoleApplication
         private int[,] Board { get; set; }
         public bool GameOver { get; set; }
         public int TurnValue { get; set; }
-        private Player Player1 { get; set; }
-        private Player Player2 { get; set; }
+        public Player Player1 { get; set; }
+        public Player Player2 { get; set; }
+        Random rnd = new Random();
 
         public FourInOneGame()
         {
+            
             GameOver = false;
             TurnValue = 0;
         }
-
         public void NewGame()
         {   
             Console.WriteLine("Please enter the number of rows");
@@ -34,7 +35,7 @@ namespace ConsoleApplication
         }
         public void CreateBoard(int newColSize, int newRowSize)
         {
-            if (newColSize < 4 || newRowSize < 4)
+            if (newColSize <= 6 || newRowSize <= 5)
             {
                 throw new ArgumentException("The number of columns or rows must be greater than 4");
             }
@@ -49,7 +50,6 @@ namespace ConsoleApplication
                 }
             }
         }
-
         public void GeneratePlayers(bool isHuman = true)
         {
             Player1 = new Player(1, true, color: "RED");
@@ -105,11 +105,19 @@ namespace ConsoleApplication
                 Board[row, column] = value;
             }
         }
-
         public void Turn(Player player)
         {
-            int column = player.GetMove();
-            MakeMove(player.Value,column);
+            if (player.IsHuman)
+            {
+                int column = player.GetMove();
+                MakeMove(player.Value,column);
+            }
+            else if(!player.IsHuman && player.Value==2)
+            {
+                int column = rnd.Next(1, 7);
+                MakeMove(player.Value,column);
+            }
+            
             if (WinningMove(player.Value))
             {
                 Console.WriteLine("Congratulations player " + Convert.ToString(player.Value)+ "\n You have won!");
@@ -123,7 +131,10 @@ namespace ConsoleApplication
         {
             if (column >= 0 && column < ColumnSize)
             {
-                return Board[5, column] == 0;
+                for (int r = 0; r < ColumnSize; r++)
+                {
+                    return Board[r, column] == 0;
+                }
             }
             throw new IndexOutOfRangeException("The number entered must be greater than 0 and less than 6");
         }
@@ -135,19 +146,17 @@ namespace ConsoleApplication
                 if (Board[row, column] == 0)
                 {
                     nextRow = row;
-                    break;
                 }
             }
 
             return nextRow;
         }
-        
         public bool WinningMove(int player)
         {
             //check horizontal locations for a win
-            for (int c = 0; c < ColumnSize - 3; c++)
+            for (int r = 0; r < RowSize; r++)
             {
-                for (int r = 0; r < RowSize; r++)
+                for (int c = 0; c < ColumnSize - 3; c++)
                 {
                     if (Board[r, c] == player && Board[r, c + 1] == player &&
                         Board[r, c + 2] == player && Board[r, c + 3] == player)
@@ -158,9 +167,9 @@ namespace ConsoleApplication
                 }
             }
             //check vertical locations for a win
-            for (int c = 0; c < ColumnSize; c++)
+            for (int r = 0; r < RowSize -3; r++)
             {
-                for (int r = 0; r < RowSize -3; r++)
+                for (int c = 0; c < ColumnSize; c++)
                 {
                     if (Board[r, c] == player && Board[r+ 1, c] == player &&
                         Board[r +2, c] == player && Board[r + 3, c] == player)
@@ -171,9 +180,9 @@ namespace ConsoleApplication
                 }
             }
             //check positively sloped diagonals for a win
-            for (int c = 0; c < ColumnSize -3; c++)
+            for (int r = 0; r < RowSize -3; r++)
             {
-                for (int r = 0; r < RowSize -3; r++)
+                for (int c = 0; c < ColumnSize -3; c++)
                 {
                     if (Board[r, c] == player && Board[r+ 1, c +1] == player &&
                         Board[r +2, c +2] == player && Board[r + 3, c + 3] == player)
@@ -184,14 +193,15 @@ namespace ConsoleApplication
                 }
             }
             //check negatively sloped diagonals for a win
-            for (int c = 0; c < ColumnSize -3; c++)
+            
+            for (int r = 3; r < RowSize; r++)
             {
-                for (int r = 0; r < RowSize -3; r++)
+                for (int c = 0; c < ColumnSize -3; c++)
                 {
                     if (Board[r, c] == player && Board[r - 1, c +1] == player &&
                         Board[r - 2, c +2] == player && Board[r - 3, c + 3] == player)
                     {
-                        Console.WriteLine("Congratulations player"+ Convert.ToString(player)+". You are the winner");
+                        Console.WriteLine("Congratulations player" + Convert.ToString(player)+". You are the winner");
                         return true;
                     }
                 }
